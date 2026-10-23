@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>المدن الخضراء - PWA</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <!-- Leaflet Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#003629">
+</head>
+<body>
+
+    <!-- Mobile Viewport Container (PWA Shell) -->
+    <div class="app-container">
+
+        <!-- ===================================================================
+             SCREEN 1: HOME VIEW (#view-home)
+             =================================================================== -->
+        <div id="view-home" class="app-view active-view">
+            <!-- Header Component -->
+            <header class="app-header">
+                <div class="user-bar">
+                    <div class="user-profile">
+                        <div class="avatar-wrapper">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAemEaaPxyqXsdwUtnySozO22DM9kcjLGgBiMnO2EYN8tNezTPtyCfyA0NqVWBgazHk7LypaDu217_NiRYY6Jurv1X4a3czyn1iL8NRAkbRCfl4iRlhtxNRYDdiAOEmokPwYURY-xxvbdVsWdYbUKXwKrDi5gsszQ63e9xS5IInW12cyUXHItGHNyzPuFY0wPt8xkjKiIjU4ATb8-NOEgxyCLppMflGzu1JCPZ7l6p1B-rXCbwHGf1c" alt="User Profile" class="user-avatar">
+                            <span class="status-dot"></span>
+                        </div>
+                        <div>
+                            <div class="greeting-row">
+                                <h1 class="greeting-title">أهلاً بك، أحمد</h1>
+                                <span class="emoji-icon">🌱</span>
+                            </div>
+                            <p class="location-text">
+                                <span class="material-symbols-outlined icon-sm" style="font-variation-settings: 'FILL' 1;">location_on</span>
+                                حي المعادي، القاهرة
+                            </p>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="icon-btn notification-btn" aria-label="الإشعارات">
+                            <span class="material-symbols-outlined">notifications</span>
+                            <span class="badge-count">3</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Bar Component -->
+                <div class="search-box">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <input type="text" class="search-input" placeholder="ابحث عن مبادرة أو مكان...">
+                    <button class="material-symbols-outlined filter-btn" aria-label="تصفية">tune</button>
+                </div>
+            </header>
+
+            <!-- Main Scrollable Content -->
+            <main class="app-main">
+
+                <!-- Hero Banner Component -->
+                <section class="hero-banner">
+                    <div class="hero-glow-1"></div>
+                    <div class="hero-glow-2"></div>
+                    <div class="hero-content">
+                        <div class="hero-top">
+                            <span class="hero-tag">
+                                <span class="pulse-dot"></span>
+                                مبادرة هذا الأسبوع
+                            </span>
+                            <span class="hero-location-badge">المعادي الخضراء</span>
+                        </div>
+                        <h2 class="hero-title">حملة تشجير حي المعادي - هذا السبت</h2>
+                        <p class="hero-desc">نستهدف زراعة ٥٠٠ شجرة لتقليل الانبعاثات وتجميل الشوارع بمشاركة أهالي الحي والشباب.</p>
+                        <div class="hero-footer">
+                            <button class="btn btn-secondary-fixed">
+                                <span>سجل الآن</span>
+                                <span class="material-symbols-outlined">arrow_back</span>
+                            </button>
+                            <div class="carousel-dots" aria-label="مؤشرات الشرائح">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Actions Grid Component -->
+                <section class="quick-actions-grid">
+                    <button class="action-card">
+                        <div class="action-icon error-bg">
+                            <span class="material-symbols-outlined">photo_camera</span>
+                        </div>
+                        <span class="action-label">إبلاغ عن مكان</span>
+                        <span class="action-sub">رصد بيئي</span>
+                    </button>
+                    <button class="action-card">
+                        <div class="action-icon secondary-bg">
+                            <span class="material-symbols-outlined">park</span>
+                        </div>
+                        <span class="action-label">انضم لمبادرة</span>
+                        <span class="action-sub">تطوع مجتمعي</span>
+                    </button>
+                    <button class="action-card">
+                        <div class="action-icon tertiary-bg">
+                            <span class="material-symbols-outlined">lightbulb</span>
+                        </div>
+                        <span class="action-label">اقترح فكرة</span>
+                        <span class="action-sub">حلول مدنية</span>
+                    </button>
+                </section>
+
+                <!-- Volunteer Opportunities Section -->
+                <section class="section-block">
+                    <div class="section-header">
+                        <div>
+                            <h3 class="section-title">فرص التطوع القريبة</h3>
+                            <p class="section-subtitle">ساهم في تحسين البيئة في منطقتك</p>
+                        </div>
+                        <button class="section-link">
+                            <span>عرض الكل</span>
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </button>
+                    </div>
+
+                    <div class="horizontal-scroll">
+                        <!-- Volunteer Card 1 -->
+                        <article class="volunteer-card">
+                            <div class="card-image-wrapper">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMrZNJh02A9n7gDcvnBdUs3ZEWeAz_jRuo-Pgfv7nLzBEixLElQowaoMKEhEHs-cHR-Alz8WHf1fhzxeyGIktcZSiEP5HiTiGlW-4NlRG9b1rlnLSOuQZi4WDmHqkcRM72avaJtIelgcyBLWqWtH8sGi0NbPwOPS3XwqhDk0ujb2nEvdillw_ewYXqU3CnHnnpZILPQ-6lO44fXI2zAQJzIDfwAYTlkkIu1ms4qOxR4IRHscWNOdgh" alt="Volunteer activity" class="card-img">
+                                <div class="card-img-gradient"></div>
+                                <div class="date-badge">
+                                    <span class="material-symbols-outlined icon-sm">calendar_today</span>
+                                    <span>السبت ١٥ نوفمبر</span>
+                                </div>
+                                <div class="seats-badge">
+                                    <span class="material-symbols-outlined icon-sm" style="font-variation-settings: 'FILL' 1;">group</span>
+                                    <span>متبقي ٥ مقاعد</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                    <h4 class="card-title">إعادة إحياء ممشى دجلة البيئي</h4>
+                                    <p class="card-location">
+                                        <span class="material-symbols-outlined icon-sm">location_on</span>
+                                        وادي دجلة - المعادي
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="points-tag">
+                                        <span class="material-symbols-outlined icon-sm">eco</span>
+                                        <span>+١٠٠ نقطة</span>
+                                    </div>
+                                    <button class="btn btn-primary">انضم الآن</button>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Volunteer Card 2 -->
+                        <article class="volunteer-card">
+                            <div class="card-image-wrapper">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDczIencW8yu1kQBI4L5LuSywx7KtrNRgfpzVQch0atnJZ3DxW3kY_X4m3TNFOTO6DtJ8obK5h_azdtjBH0479HIyLHDFa_NBWFXl0wbA4HEWuGw2ZfKyTE6m5p9UJH34fLm8EZPOKy5xfXvr_PGP9XhzuNP5u8tszq7Q1jNHujWT1LgyrG7S3o3iwdQ4F_ELZP5IgWYTu7DY9_95ZkkNiI1DkY2kFBviEZrZ9u8bxj000BdLxzFlXe" alt="Rooftop garden workshop" class="card-img">
+                                <div class="card-img-gradient"></div>
+                                <div class="date-badge">
+                                    <span class="material-symbols-outlined icon-sm">calendar_today</span>
+                                    <span>الأحد ١٦ نوفمبر</span>
+                                </div>
+                                <div class="seats-badge">
+                                    <span class="material-symbols-outlined icon-sm" style="font-variation-settings: 'FILL' 1;">group</span>
+                                    <span>متبقي ٣ مقاعد</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                    <h4 class="card-title">ورشة الزراعة المنزلية والأسطح</h4>
+                                    <p class="card-location">
+                                        <span class="material-symbols-outlined icon-sm">location_on</span>
+                                        ميدان الحرية - المعادي
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="points-tag">
+                                        <span class="material-symbols-outlined icon-sm">eco</span>
+                                        <span>+٨٠ نقطة</span>
+                                    </div>
+                                    <button class="btn btn-primary">انضم الآن</button>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Latest Updates & Impact Section -->
+                <section class="section-block mb-last">
+                    <div class="section-header">
+                        <div class="header-with-icon">
+                            <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">published_with_changes</span>
+                            <h3 class="section-title">آخر التحديثات والأثر البيئي</h3>
+                        </div>
+                        <span class="status-pill">تم الإنجاز</span>
+                    </div>
+
+                    <div class="impact-card">
+                        <div class="impact-info">
+                            <h4 class="card-title">تطوير وتأهيل حديقة الحي العاشر</h4>
+                            <p class="impact-desc">تحويل مساحة مهملة إلى مسطح أخضر ذكي مكتمل بالأشجار المظللة ومسار مشي.</p>
+                        </div>
+
+                        <!-- Before/After Comparison Grid -->
+                        <div class="comparison-grid">
+                            <div class="comparison-panel">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1jLRzTUIeYNV7l6AW1aWop6Mfr0LFToPWMJjJDCE-IhL7TUYC84zn_ie5p6Ic0fePpbYntKZv6UvG1HKI9h0gRAf_nDkH4yucIABCN8_LmWlpRrwMRBAVASIKjbSujXOC9hcIdcd4XSG1miVJYec2CdNc6yYFWdYCsQwGXm03vcDU0-sT8Xhv5ce3cjvDCfm2JaOahoJ0VHCb8Y-c-FQ_-2OHIIkznNdeBUrlaOS6FLoZj_xMI1Fx" alt="Before development" class="comparison-img">
+                                <span class="badge-before">قبل (سبتمبر)</span>
+                            </div>
+                            <div class="comparison-panel">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2NOtoZfBnP6XMkuOc8ddIHcM5_V7CRADgH0RLIMtFjLCvj36nLl63wwoEElTUDQoAOdtTJz0R-PG4wAqbttBRVnSM_LpL0o3SpIilAKp8tRuSqfXFuAa3VaLo5O6HmFMtUxP7Txa71d-fwkQMmCnDEceej_nfRjo7p-LxzLMZplEzRfRU1HBPq2jhGpWow6omG4PsYnVVrFRofBP1_jI-uiSvgbImti8do7Io_51I6liP7bI7Cjlt" alt="After development" class="comparison-img">
+                                <span class="badge-after">بعد (الآن)</span>
+                            </div>
+                            <div class="comparison-handle">
+                                <div class="handle-circle">
+                                    <span class="material-symbols-outlined icon-sm">compare_arrows</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Impact Metrics Bar -->
+                        <div class="metrics-bar">
+                            <div class="metric-item">
+                                <span class="material-symbols-outlined text-secondary icon-sm">forest</span>
+                                <span><strong>١٢٠</strong> شجرة زُرعت</span>
+                            </div>
+                            <div class="metric-divider"></div>
+                            <div class="metric-item">
+                                <span class="material-symbols-outlined text-secondary icon-sm">co2</span>
+                                <span><strong>-٣٫٢ طن</strong> انبعاثات</span>
+                            </div>
+                            <div class="metric-divider"></div>
+                            <div class="metric-item">
+                                <span class="material-symbols-outlined text-secondary icon-sm">volunteer_activism</span>
+                                <span><strong>٤٥</strong> متطوع</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             SCREEN 2: GREEN MAP VIEW (#view-map)
+             =================================================================== -->
+        <div id="view-map" class="app-view">
+            <!-- Top Map Bar -->
+            <header class="app-header map-header">
+                <button class="icon-btn notification-btn" aria-label="الإشعارات">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <h1 class="header-title-center">المدن الخضراء</h1>
+                <button class="icon-btn back-to-home-btn" id="btn-map-back" aria-label="رجوع">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+            </header>
+
+            <!-- Map Viewport Shell -->
+            <main class="map-view-container">
+                
+                <!-- Floating Top Search & Filter Bar -->
+                <div class="map-floating-top">
+                    <div class="map-search-bar">
+                        <span class="material-symbols-outlined search-icon">search</span>
+                        <input type="text" class="search-input map-input" value="المعادي، القاهرة" placeholder="ابحث عن متنزه، شجرة، أو مبادرة حيك...">
+                        <button class="mic-btn" aria-label="البحث الصوتى">
+                            <span class="material-symbols-outlined icon-sm">mic</span>
+                        </button>
+                    </div>
+
+                    <!-- Filter Horizontal Scroll Chips -->
+                    <div class="horizontal-scroll map-filters">
+                        <button class="chip-filter active">الكل (48)</button>
+                        <button class="chip-filter chip-tertiary">
+                            <span class="pulse-dot warning-dot"></span>
+                            <span>قيد التطوير (14)</span>
+                        </button>
+                        <button class="chip-filter">
+                            <span class="dot-indicator error-dot"></span>
+                            <span>محتاج تحسين (9)</span>
+                        </button>
+                        <button class="chip-filter">
+                            <span class="dot-indicator secondary-dot"></span>
+                            <span>مساحات مكتملة (25)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Leaflet Real Interactive Map Canvas Container -->
+                <div id="leaflet-map-canvas" class="real-map-canvas"></div>
+
+                <!-- Floating Right Map Action Controls -->
+                <div class="map-controls-right">
+                    <button class="control-btn" id="btn-recenter" aria-label="تحديد موقعي">
+                        <span class="material-symbols-outlined">my_location</span>
+                    </button>
+                    <button class="control-btn" aria-label="طبقات الخريطة">
+                        <span class="material-symbols-outlined">layers</span>
+                    </button>
+                </div>
+
+                <!-- Floating Left Zoom Controls -->
+                <div class="map-controls-left">
+                    <button class="zoom-btn" id="btn-zoom-in" aria-label="تكبير">
+                        <span class="material-symbols-outlined icon-sm">add</span>
+                    </button>
+                    <div class="control-divider"></div>
+                    <button class="zoom-btn" id="btn-zoom-out" aria-label="تصغير">
+                        <span class="material-symbols-outlined icon-sm">remove</span>
+                    </button>
+                </div>
+
+                <!-- Slidable Bottom Sheet Context Card -->
+                <div class="bottom-sheet">
+                    <div class="sheet-grab-handle"></div>
+                    <div class="sheet-content">
+                        <div class="sheet-thumb-wrapper">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2BL83GWv6OE9SjQbPmiEJebXdKSY4TXEwDdUHUmef7S0UjlgPWtIftTuLfEZpjNvdgiWCPv8QldXwC5bydTR_70_nuRRQc75caR0RmeXk2CbseIXHi4wW08Xkjbuggs_jKSYXo4ybr97B7FRAGntBdlysshcNLbUi9oWlf32sdXoIm9QTX-W5y3Fb6_tFFq9KfLl6dgx33VGwDl0HL8Y5aqR9BKdevU5by9WfySBec8C2Pw5zUp9Y" alt="Park view" class="sheet-thumb">
+                            <div class="thumb-badge">
+                                <span class="material-symbols-outlined icon-sm">photo_camera</span>
+                                <span>12</span>
+                            </div>
+                        </div>
+                        <div class="sheet-info">
+                            <div class="sheet-status-row">
+                                <span class="status-chip chip-tertiary">
+                                    <span class="pulse-dot warning-dot"></span>
+                                    قيد التطوير (إنجاز 65%)
+                                </span>
+                                <span class="distance-text">
+                                    <span class="material-symbols-outlined icon-sm">navigation</span>
+                                    1.2 كم
+                                </span>
+                            </div>
+                            <h2 class="sheet-title">حديقة الحي السابع - المعادي</h2>
+                            <p class="sheet-subtitle">تشجير 120 شجرة ظل وتركيب شبكة ري بالتنقيط</p>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sheet-actions">
+                        <button class="btn btn-primary btn-sheet-full">
+                            <span>عرض التفاصيل والتقدم</span>
+                            <span class="material-symbols-outlined">arrow_back</span>
+                        </button>
+                        <button class="icon-btn btn-square" aria-label="مشاركة المبادرة">
+                            <span class="material-symbols-outlined">share</span>
+                        </button>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             SCREEN 3: REPORT A PLACE VIEW (#view-report)
+             =================================================================== -->
+        <div id="view-report" class="app-view">
+            <!-- Top App Bar Component -->
+            <header class="app-header map-header">
+                <button class="icon-btn" id="btn-report-back" aria-label="الرجوع">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+                <h1 class="header-title-center">الإبلاغ عن مكان محتاج تحسين</h1>
+                <button class="icon-btn notification-btn" aria-label="الإشعارات">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span class="badge-count">3</span>
+                </button>
+            </header>
+
+            <!-- Main Content Flow Container -->
+            <main class="app-main" style="padding-bottom: 2rem;">
+                <!-- Context Sub-header Banner -->
+                <div class="report-banner">
+                    <div class="report-banner-icon">
+                        <span class="material-symbols-outlined">eco</span>
+                    </div>
+                    <div>
+                        <h2 class="report-banner-title">معاً لمدن أكثر اخضراراً ونقاءً</h2>
+                        <p class="report-banner-desc">مساهمتك المباشرة تساعد بلديتك في رصد وإعادة تأهيل المساحات وتحويلها إلى واحات بيئية مستدامة.</p>
+                    </div>
+                </div>
+
+                <!-- Main Step-by-Step Reporting Card -->
+                <div class="report-card">
+                    <!-- Step 1: Photo Upload Section -->
+                    <div class="form-step-group">
+                        <div class="step-header">
+                            <div class="step-title-wrapper">
+                                <span class="step-number">١</span>
+                                <span class="step-title">صور توثيق الموقع</span>
+                            </div>
+                            <span class="step-hint">مطلوب صورة واحدة كحد أدنى</span>
+                        </div>
+                        
+                        <div class="upload-dropzone">
+                            <div class="upload-icon-circle">
+                                <span class="material-symbols-outlined">photo_camera</span>
+                            </div>
+                            <p class="upload-text">التقط صورة للمكان أو اختر من المعرض</p>
+                            <p class="upload-subtext">يدعم بصيغ JPG, PNG حتى 10 ميغابايت</p>
+                            <button class="btn-add-photo" type="button">
+                                <span class="material-symbols-outlined icon-sm">add</span>
+                                <span>إضافة صورة</span>
+                            </button>
+                        </div>
+
+                        <!-- Uploaded Preview Thumbnails Strip -->
+                        <div class="thumbnails-strip">
+                            <div class="thumb-preview-box">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC286E1Y7pSRe25UJIt7lM_nNH6v6EKgfSE7IPUN9kO977_yH9KBaS3LzJ07XRO7KLq8atHNM7eGr3xRskuBrm3sVBPawyjIjotBzbeKurgDZj08WHz4Kzvnk7QqV5YhCOJ-7rEZqsUAMnIJ1VTNFIsSgW17ZQVshFp4JIMIQ6FAlkPytRiF-wXuydUYrTJAHYq5wN2WyXgulHAmVwR7It4lYhTJ4tC-rh5tQ1WixXb_QkT_HklEkdC" alt="Preview 1">
+                                <button class="thumb-delete-btn" aria-label="حذف الصورة">
+                                    <span class="material-symbols-outlined icon-sm">close</span>
+                                </button>
+                                <div class="thumb-badge-main">رئيسية</div>
+                            </div>
+                            <div class="thumb-preview-box">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4DM-k1ImTM91UUR3rAxE6QhE-9WjkUi-CjrfyoTFaNQ-mItP4VMUocJpPt1HqyOyIl0Y7zbF_XXKTeptoTNn5sWViv_LBLdVRuatpqRH-dLo9uMt3z2ivYwSEEoAPbfJzydmba5dcRZepWYD0Pdnj7QdWx7T29-WVZbeEJAuDMBH4y-xS9ADaeW8NAGD1UlN6-myAK-Wf82Jnfz09IAwdLxGbuFKiFlwfm1VGFYU1feQWgXIaOxbX" alt="Preview 2">
+                                <button class="thumb-delete-btn" aria-label="حذف الصورة">
+                                    <span class="material-symbols-outlined icon-sm">close</span>
+                                </button>
+                            </div>
+                            <div class="thumb-add-slot">
+                                <span class="material-symbols-outlined">add_photo_alternate</span>
+                                <span class="slot-text">+ صورة</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="form-divider">
+
+                    <!-- Step 2: Location Picker -->
+                    <div class="form-step-group">
+                        <div class="step-header">
+                            <div class="step-title-wrapper">
+                                <span class="step-number">٢</span>
+                                <span class="step-title">الموقع الجغرافي</span>
+                            </div>
+                            <div class="gps-active-badge">
+                                <span class="pulse-dot"></span>
+                                <span>GPS نشط</span>
+                            </div>
+                        </div>
+
+                        <div class="location-map-preview">
+                            <div class="mini-map-container">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuSTMJPiAxzdb1VTsHlsFZFSanKRIsl1bj_O6TH9HLVLXxa7yZ25SEWhsUcqT987ZYl5us4Sq7X54DiH5zrq9NqkstxMpYHcfBzaSf8HFAXsaKJNHtVsuCdXiN_-k0Ln4A20LVNencee1HEpR7gRv10KSiRPd3LTxvQPkOnKO4kx3pyBB8SIE8-bdP8M37g-UpQ929Ksdbnffd1yXEGr9zSSbZSDjVMh4qLGdwUtqfw6nkcQkA8Va3" alt="Location Map" class="mini-map-img">
+                                <div class="map-pin-pulse-center">
+                                    <span class="pin-ping-ring"></span>
+                                    <div class="pin-icon-bubble">
+                                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">location_on</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="location-meta-footer">
+                                <div class="location-info-left">
+                                    <span class="material-symbols-outlined text-primary">near_me</span>
+                                    <div class="location-text-group">
+                                        <p class="loc-title">حي النرجس، تقاطع شارع عثمان بن عفان</p>
+                                        <p class="loc-sub">الرياض، المملكة العربية السعودية (دقة ٤ أمتار)</p>
+                                    </div>
+                                </div>
+                                <button class="btn-text-edit" type="button">تعديل على الخريطة</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="form-divider">
+
+                    <!-- Step 3: Form Fields -->
+                    <div class="form-step-group space-y-3.5">
+                        <div class="step-header">
+                            <div class="step-title-wrapper">
+                                <span class="step-number">٣</span>
+                                <span class="step-title">تفاصيل البلاغ</span>
+                            </div>
+                        </div>
+
+                        <!-- Problem Category Dropdown -->
+                        <div class="input-group">
+                            <label class="input-label" for="category">تصنيف المشكلة</label>
+                            <div class="select-wrapper">
+                                <select id="category" class="form-input form-select">
+                                    <option value="trees">غياب أشجار ومساحات خضراء (تشجير وزراعة)</option>
+                                    <option value="waste">نظافة ومخلفات بيئية</option>
+                                    <option value="maintenance">صيانة مرافق الحديقة وشبكات الري</option>
+                                    <option value="encroachment">تعديات على الرصيف والممشى الأخضر</option>
+                                </select>
+                                <span class="material-symbols-outlined select-arrow">expand_more</span>
+                            </div>
+                        </div>
+
+                        <!-- Title Input -->
+                        <div class="input-group">
+                            <label class="input-label" for="report-title">عنوان البلاغ</label>
+                            <input type="text" id="report-title" class="form-input" value="شارع يحتاج إلى حزام تشجير ومصدات غبار" placeholder="عنوان المكان أو الشارع...">
+                        </div>
+
+                        <!-- Description Textarea -->
+                        <div class="input-group">
+                            <label class="input-label" for="report-desc">الوصف الدقيق</label>
+                            <textarea id="report-desc" rows="3" class="form-input form-textarea" placeholder="اكتب وصفاً دقيقاً لما يحتاجه هذا المكان (مثل نوع الأشجار المناسبة، حالة الرصيف، أو مشكلة المياه)..."></textarea>
+                            <div class="textarea-footer-info">
+                                <span>كلما كان الوصف أدق ساعد الفرق الميدانية أسرع</span>
+                                <span>٠ / ٣٠٠</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-2">
+                        <button type="button" class="btn btn-primary w-full h-12 rounded-xl text-headline-sm shadow-lg shadow-primary-container/20">
+                            <span>إرسال البلاغ</span>
+                            <span class="text-xl">🚀</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Secondary Section: Previous Reports Tracking Timeline -->
+                <section class="previous-reports-section">
+                    <div class="reports-sec-header">
+                        <div class="reports-sec-title-group">
+                            <span class="material-symbols-outlined text-primary">history</span>
+                            <h2 class="section-title">بلاغاتي السابقة</h2>
+                        </div>
+                        <span class="active-report-badge">بلاغ نشط (١)</span>
+                    </div>
+
+                    <!-- Single Tracking Item Card -->
+                    <div class="tracking-item-card">
+                        <div class="tracking-item-top">
+                            <div>
+                                <span class="tracking-id">بلاغ رقم #GRN-4089</span>
+                                <h3 class="tracking-title">غرس أشجار ظل في ممشى الحي الشمالي</h3>
+                            </div>
+                            <span class="status-pill-progress">قيد العمل</span>
+                        </div>
+
+                        <!-- Step Progression Timeline -->
+                        <div class="timeline-container">
+                            <div class="timeline-line-bg"></div>
+                            <div class="timeline-line-active"></div>
+
+                            <div class="timeline-step completed">
+                                <div class="step-dot"><span class="material-symbols-outlined icon-sm">check</span></div>
+                                <span class="timeline-label">تم الإرسال</span>
+                            </div>
+                            <div class="timeline-step completed">
+                                <div class="step-dot"><span class="material-symbols-outlined icon-sm">check</span></div>
+                                <span class="timeline-label">قيد المراجعة</span>
+                            </div>
+                            <div class="timeline-step active">
+                                <div class="step-dot active-dot"><span class="inner-dot"></span></div>
+                                <span class="timeline-label active-label">قيد العمل</span>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="step-dot"><span class="material-symbols-outlined icon-sm">pending</span></div>
+                                <span class="timeline-label">مكتمل</span>
+                            </div>
+                        </div>
+
+                        <!-- Progress Update Note -->
+                        <div class="timeline-note">
+                            <span class="material-symbols-outlined text-secondary icon-sm">verified</span>
+                            <span>تم اعتماد المبادرة وفريق البلدية بدأ بزراعة 45 شتلة نيم وسدر.</span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+<!-- ===================================================================
+             SCREEN 4: COMMUNITY SUGGESTIONS VIEW (#view-community)
+             =================================================================== -->
+        <div id="view-community" class="app-view">
+            <!-- Top App Bar -->
+            <header class="app-header map-header">
+                <button class="icon-btn" aria-label="الإشعارات">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span class="badge-count">3</span>
+                </button>
+                <h1 class="header-title-center">المدن الخضراء</h1>
+                <button class="icon-btn" id="btn-community-back" aria-label="الرجوع">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+            </header>
+
+            <!-- Page Intent Header Strip & Add Idea CTA -->
+            <div class="community-intro-banner">
+                <div class="community-intro-text">
+                    <h2 class="community-main-title">أفكار ومقترحات المجتمع</h2>
+                    <p class="community-sub-title">شارك رؤيتك لبيئة حضرية مستدامة ونظيفة</p>
+                </div>
+                <button class="btn btn-primary-container add-idea-btn" type="button">
+                    <span>أضف فكرة</span>
+                    <span class="emoji-sm">💡</span>
+                </button>
+            </div>
+
+            <!-- Main Scrollable Canvas -->
+            <main class="app-main community-main">
+                <!-- Horizontal Filter Chips Scroll -->
+                <section class="horizontal-scroll community-filters">
+                    <button class="chip-filter">الكل</button>
+                    <button class="chip-filter active">
+                        <span class="material-symbols-outlined icon-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+                        <span>الأعلى تصويتاً</span>
+                    </button>
+                    <button class="chip-filter">
+                        <span class="dot-indicator warning-dot"></span>
+                        <span>قيد الدراسة</span>
+                    </button>
+                    <button class="chip-filter">
+                        <span class="dot-indicator secondary-dot"></span>
+                        <span>مقترحات معتمدة</span>
+                    </button>
+                </section>
+
+                <!-- Feed Cards Container -->
+                <div class="community-feed">
+                    <!-- Card 1 -->
+                    <article class="community-card">
+                        <div class="community-card-header">
+                            <div class="author-info">
+                                <div class="author-avatar-wrap">
+                                    <img class="author-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbgqgqJZYpDzPO-kGtegB5jAbeNK8pPEK7-8hq8A8jcPWraV-gq3_Av6fQua2CMbrneI54uu9I2HaysYNGlnt2U1AHVgJ3M6xF5C66nW4LSBuIbWNlBOhOvG2cmWRFutttR0x2FdwERQ0_JdESmCFO2MeaMPCspI0y7ISQ5WBPvSjFU7ScTUbYGbQ6w8auTbwxFV_r5EHosxzrqEa-iSfVs1rCk3ay2CY5RQKWICapcR0yT1TSKIPw" alt="Sara Kamal">
+                                </div>
+                                <div class="author-meta">
+                                    <div class="author-name-row">
+                                        <span class="author-name">م. سارة كمال</span>
+                                        <span class="material-symbols-outlined text-secondary icon-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                    </div>
+                                    <span class="post-time">منذ يومين • حي وسط البلد</span>
+                                </div>
+                            </div>
+                            <span class="status-badge-pending">
+                                <span class="material-symbols-outlined icon-sm">pending_actions</span>
+                                <span>قيد المراجعة</span>
+                            </span>
+                        </div>
+
+                        <div class="community-card-content">
+                            <h3 class="community-card-title">مقترح تحويل قطعة الأرض الفضاء بوسط البلد لحديقة مجتمعية مصغرة</h3>
+                            <p class="community-card-desc">تحويل المساحة المهملة في تقاطع شارع النيل إلى واحة خضراء تضم مشاتل للنباتات الصحراوية الموفرة للمياه، وممشى مظلل بألواح الطاقة الشمسية، ومقاعد ذكية من الخشب المعاد تدويره لتشجيع التفاعل المجتمعي وتحسين جودة الهواء.</p>
+                        </div>
+
+                        <div class="community-image-wrapper">
+                            <img class="community-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAm_bP7fxYVSDA-_mKLAV9O2wCqXTuEZY18xmP-n8xtnzzR9VpcP7wW9sF30R4oGv5tGOswt0XVL3xgRyrH6E15qBteVqTQsz2zo5YxU19KOFKEXh96w3rsVMPTIIT4cGRPJ0XKI7JLT-EhSB2MoRpjVkvgcBGVqkkt6i9183b7uoSu7eqTjCus5Pfiz7Qo4cHQreSpN6VR3u_nmgHCKmbUiQrWKTwa5eBWRugaKfMUSca73hf662re" alt="Proposal Render">
+                            <div class="image-floating-badge">
+                                <span class="material-symbols-outlined icon-sm">palette</span>
+                                <span>تصور افتراضي مقترح</span>
+                            </div>
+                        </div>
+
+                        <div class="community-card-footer">
+                            <div class="upvote-module active-upvote">
+                                <button class="upvote-btn" aria-label="تصويت">
+                                    <span class="material-symbols-outlined icon-sm" style="font-variation-settings: 'FILL' 1;">arrow_upward</span>
+                                </button>
+                                <span class="upvote-count">+142</span>
+                                <span class="upvote-label">صوت</span>
+                            </div>
+                            <div class="community-actions-right">
+                                <button class="action-text-btn">
+                                    <span class="material-symbols-outlined icon-sm">chat_bubble_outline</span>
+                                    <span>28 تعليق</span>
+                                </button>
+                                <button class="icon-btn-sm" aria-label="مشاركة">
+                                    <span class="material-symbols-outlined icon-sm">share</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="community-card">
+                        <div class="community-card-header">
+                            <div class="author-info">
+                                <div class="author-avatar-wrap">
+                                    <img class="author-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSDs_Tny0F0l51ujp_NVQuDZ0kXlyWONBmD7Htj1sb_gYP5GXhgA4EAo9E5-lN0oS-2MO3BlNiQxLPL91MVAVxWdkFkX8sapQav4l9PZhwi_DVlYeZVVSgTl6jE4ueWbN5yqmb_JkGLgNsRUx7naX3LtKST8YpNacby-fg7QXYmeB5VnuXoKDMbM1X-2BZszVpscAaLljfKAGz0I12HmKXi4OkPFWsuQwF7YQHgLOcjoR-r-fdpVbw" alt="Tarek Abdulrahman">
+                                </div>
+                                <div class="author-meta">
+                                    <div class="author-name-row">
+                                        <span class="author-name">أ. طارق عبد الرحمن</span>
+                                    </div>
+                                    <span class="post-time">منذ 5 أيام • حي الأندلس</span>
+                                </div>
+                            </div>
+                            <span class="status-badge-approved">
+                                <span class="material-symbols-outlined icon-sm" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+                                <span>معتمد للتنفيذ</span>
+                            </span>
+                        </div>
+
+                        <div class="community-card-content">
+                            <h3 class="community-card-title">زراعة أسطح المدارس الحكومية بالنباتات العطرية والخضروات</h3>
+                            <p class="community-card-desc">مبادرة تربوية وبيئية تهدف لاستغلال أسطح المدارس لتبريد المباني طبيعياً بنسبة 35%، وتعليم الطلاب مهارات الزراعة المائية والاعتناء بحدائق الأعشاب والنباتات الطبية مع تدوير المياه الرمادية.</p>
+                        </div>
+
+                        <div class="community-card-footer">
+                            <div class="upvote-module">
+                                <button class="upvote-btn" aria-label="تصويت">
+                                    <span class="material-symbols-outlined icon-sm">arrow_upward</span>
+                                </button>
+                                <span class="upvote-count">+95</span>
+                                <span class="upvote-label">صوت</span>
+                            </div>
+                            <div class="community-actions-right">
+                                <button class="action-text-btn">
+                                    <span class="material-symbols-outlined icon-sm">chat_bubble_outline</span>
+                                    <span>14 تعليق</span>
+                                </button>
+                                <button class="icon-btn-sm" aria-label="مشاركة">
+                                    <span class="material-symbols-outlined icon-sm">share</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             SCREEN 5: ACCOUNT & PROFILE VIEW (#view-account)
+             =================================================================== -->
+        <div id="view-account" class="app-view">
+            <!-- Top App Bar -->
+            <header class="app-header map-header">
+                <button aria-label="الإعدادات" class="icon-btn">
+                    <span class="material-symbols-outlined text-[22px]">settings</span>
+                </button>
+                <h1 class="header-title-center">الملف الشخصي</h1>
+                <button aria-label="الرجوع" class="icon-btn" id="btn-account-back">
+                    <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                </button>
+            </header>
+
+            <!-- Main Content Canvas -->
+            <main class="app-main" style="padding-bottom: 2rem;">
+                <!-- Profile Header & Rank Card -->
+                <section class="profile-card">
+                    <div class="profile-glow"></div>
+                    <div class="profile-avatar-area">
+                        <div class="avatar-ring-box">
+                            <img class="profile-user-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDReIhHij3NZjdt76fvIF8ZEpWaw45eaPyw-Eh8Q30FvWX1PY3qR_5wj5xa_qg9PGc48me8I1ztBmKaDjx-OoHpP5HdgxZ3ifX4J1d10eFh62MC6OXww8UzTAeWCzjpAjG1ogA9hnJH_-_T0kYLWZnqAXNGP3AGgH1TFi4FxW1WgrTXGTv7_BnPUI0R8oujgmAy3az-hYTVZfZFPz1zcyIiC8jRKANfg270M3VgV1e5P4VcR7upWKuA" alt="Ahmed Mahmoud">
+                        </div>
+                        <div class="verified-badge-float">
+                            <span class="material-symbols-outlined fill text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        </div>
+                    </div>
+                    <h2 class="profile-name">أحمد محمود</h2>
+                    <span class="profile-id">عضوية نشطة: #EG-84291</span>
+
+                    <div class="eco-rank-pill">
+                        <span>🌿</span>
+                        <span class="rank-text">صديق البيئة الفضي</span>
+                    </div>
+
+                    <div class="level-progress-box">
+                        <div class="level-info-row">
+                            <span class="level-title-text">المستوى 4: ناشط واعد</span>
+                            <span class="level-score-text">1,250 / 2,000 نقطة (62%)</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill-custom" style="width: 62%;"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Impact Dashboard Grid (4 Bento Stat Cards) -->
+                <section class="bento-section">
+                    <div class="section-header">
+                        <h3 class="section-title">لوحة الأثر البيئي</h3>
+                        <span class="quarter-growth-pill">+18% هذا الربع</span>
+                    </div>
+                    <div class="bento-grid">
+                        <!-- Card 1 -->
+                        <div class="bento-box">
+                            <div class="bento-box-top">
+                                <span class="bento-label">أشجار زُرعت</span>
+                                <div class="bento-icon-wrap bg-green-soft">
+                                    <span class="material-symbols-outlined fill text-secondary" style="font-variation-settings: 'FILL' 1;">park</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="bento-metric">18</div>
+                                <div class="bento-sub text-secondary font-bold">+3 هذا الشهر</div>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="bento-box">
+                            <div class="bento-box-top">
+                                <span class="bento-label">بلاغات نُفّذت</span>
+                                <div class="bento-icon-wrap bg-primary-soft">
+                                    <span class="material-symbols-outlined fill text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="bento-metric">5</div>
+                                <div class="bento-sub text-outline">نسبة قبول 100%</div>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="bento-box">
+                            <div class="bento-box-top">
+                                <span class="bento-label">تطوع ميداني</span>
+                                <div class="bento-icon-wrap bg-surface-high">
+                                    <span class="material-symbols-outlined text-primary">schedule</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="bento-metric">24 <span class="unit-text">ساعة</span></div>
+                                <div class="bento-sub text-outline">في 4 فعاليات مدنية</div>
+                            </div>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="bento-box">
+                            <div class="bento-box-top">
+                                <span class="bento-label">نقاط بيئية</span>
+                                <div class="bento-icon-wrap bg-tertiary-soft">
+                                    <span class="material-symbols-outlined fill text-tertiary" style="font-variation-settings: 'FILL' 1;">stars</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="bento-metric">1,250</div>
+                                <div class="bento-sub text-secondary font-bold">قابلة للاستبدال</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Achievements & Badges Carousel -->
+                <section class="badges-section">
+                    <div class="section-header">
+                        <div class="header-with-count">
+                            <h3 class="section-title">الشارات والأوسمة</h3>
+                            <span class="count-pill">3 من 8</span>
+                        </div>
+                        <button class="section-link">عرض الكل</button>
+                    </div>
+                    <div class="badges-carousel">
+                        <!-- Badge 1 -->
+                        <div class="badge-card">
+                            <div class="badge-icon-box bg-secondary-soft text-secondary">
+                                <span class="material-symbols-outlined fill text-[26px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+                            </div>
+                            <h4 class="badge-title">غارس الأمل</h4>
+                            <span class="badge-status-pill status-completed">مكتملة</span>
+                        </div>
+                        <!-- Badge 2 -->
+                        <div class="badge-card">
+                            <div class="badge-icon-box bg-primary-fixed text-primary">
+                                <span class="material-symbols-outlined fill text-[26px]" style="font-variation-settings: 'FILL' 1;">explore</span>
+                            </div>
+                            <h4 class="badge-title">مستكشف الخريطة</h4>
+                            <span class="badge-status-pill status-completed">مكتملة</span>
+                        </div>
+                        <!-- Badge 3 -->
+                        <div class="badge-card">
+                            <div class="badge-icon-box bg-surface-container-high text-outline relative">
+                                <span class="material-symbols-outlined text-[26px]">shield</span>
+                            </div>
+                            <h4 class="badge-title">بطل الحي</h4>
+                            <span class="badge-status-pill status-progress">3/5 بلاغات</span>
+                        </div>
+                        <!-- Badge 4 -->
+                        <div class="badge-card badge-locked">
+                            <div class="badge-icon-box bg-surface-dim text-outline">
+                                <span class="material-symbols-outlined text-[24px]">lock</span>
+                            </div>
+                            <h4 class="badge-title">حارس الواحة</h4>
+                            <span class="badge-status-pill status-locked">مستوى 5</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Contributions & Activities (Timeline Layout) -->
+                <section class="activities-section">
+                    <div class="section-header">
+                        <h3 class="section-title">سجل المساهمات الأخيرة</h3>
+                        <button class="section-link">السجل الكامل</button>
+                    </div>
+                    <div class="activities-card-list">
+                        <!-- Activity Item 1 -->
+                        <div class="activity-item">
+                            <div class="activity-icon-wrap bg-secondary-soft text-secondary">
+                                <span class="material-symbols-outlined fill text-[18px]" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-title-row">
+                                    <h4 class="activity-title">تشجير حديقة الحي السابع</h4>
+                                    <span class="points-badge-green">+50 نقطة</span>
+                                </div>
+                                <p class="activity-desc">زراعة 4 شتلات زيتون والمشاركة في ري الحزام الأخضر.</p>
+                                <div class="activity-meta">
+                                    <span><span class="material-symbols-outlined text-[14px]">calendar_today</span> منذ يومين</span>
+                                    <span>•</span>
+                                    <span class="text-secondary font-medium">مكتمل وموثق</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Activity Item 2 -->
+                        <div class="activity-item">
+                            <div class="activity-icon-wrap bg-primary-fixed text-primary">
+                                <span class="material-symbols-outlined fill text-[18px]" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-title-row">
+                                    <h4 class="activity-title">تقديم بلاغ معتمد</h4>
+                                    <span class="points-badge-green">+30 نقطة</span>
+                                </div>
+                                <p class="activity-desc">إصلاح شبكة ري تالفة في مسار المشاة بمنتزه النخيل.</p>
+                                <div class="activity-meta">
+                                    <span><span class="material-symbols-outlined text-[14px]">calendar_today</span> منذ 5 أيام</span>
+                                    <span>•</span>
+                                    <span class="text-secondary font-medium">تم التنفيذ بنجاح</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Activity Item 3 -->
+                        <div class="activity-item activity-item-last">
+                            <div class="activity-icon-wrap bg-tertiary-fixed text-on-tertiary-fixed-variant">
+                                <span class="material-symbols-outlined text-[18px]">emoji_events</span>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-title-row">
+                                    <h4 class="activity-title">وسام مستكشف الخريطة</h4>
+                                    <span class="points-badge-green">+100 نقطة</span>
+                                </div>
+                                <p class="activity-desc">إتمام مسح وتوثيق 10 مساحات خضراء غير مسجلة.</p>
+                                <div class="activity-meta">
+                                    <span><span class="material-symbols-outlined text-[14px]">calendar_today</span> 12 أكتوبر 2024</span>
+                                    <span>•</span>
+                                    <span class="text-on-surface-variant font-medium">ترقية رتبة</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             BOTTOM NAVIGATION DOCK COMPONENT (Shared across all views)
+             =================================================================== -->
+        <nav class="bottom-nav" aria-label="شريط التنقل الرئيسي">
+            <a href="#" class="nav-item" data-target="view-home">
+                <span class="material-symbols-outlined">home</span>
+                <span class="nav-label">الرئيسية</span>
+            </a>
+            <a href="#" class="nav-item" data-target="view-map">
+                <span class="material-symbols-outlined">map</span>
+                <span class="nav-label">الخريطة</span>
+            </a>
+            <a href="#" class="nav-item fab-item" data-target="view-report">
+                <div class="fab-button">
+                    <span class="material-symbols-outlined">add</span>
+                </div>
+                <span class="nav-label fab-label">إبلاغ</span>
+            </a>
+            <a href="#" class="nav-item" data-target="view-community">
+                <span class="material-symbols-outlined">group</span>
+                <span class="nav-label">المجتمع</span>
+            </a>
+            <a href="#" class="nav-item" data-target="view-account">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+                <span class="nav-label">حسابي</span>
+            </a>
+        </nav>
+
+    </div>
+
+    <!-- Leaflet JS Library -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <!-- Custom Application JS Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
