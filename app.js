@@ -3,6 +3,13 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Hide bottom nav immediately on load if starting on an auth view
+    const bottomNav = document.querySelector('.bottom-nav');
+    const activeView = document.querySelector('.app-view.active-view');
+    if (bottomNav && activeView && (activeView.id === 'view-login' || activeView.id === 'view-signup')) {
+        bottomNav.style.display = 'none';
+    }
+    
     initViewSwitching();
     initLeafletMap();
     registerServiceWorker(); // <-- PWA Service Worker Registration
@@ -34,6 +41,7 @@ window.toggleInterest = function(buttonElement) {
 function initViewSwitching() {
     const navItems = document.querySelectorAll('.bottom-nav .nav-item[data-target]');
     const views = document.querySelectorAll('.app-view');
+    const bottomNav = document.querySelector('.bottom-nav'); // <-- Reference the bottom nav
     const backToHomeBtn = document.getElementById('btn-map-back');
     const reportBackBtn = document.getElementById('btn-report-back');
     const communityBackBtn = document.getElementById('btn-community-back');
@@ -53,6 +61,15 @@ function initViewSwitching() {
                 view.classList.remove('active-view');
             }
         });
+
+        // Hide bottom nav on auth screens (Login & Sign Up), show on others
+        if (bottomNav) {
+            if (targetViewId === 'view-login' || targetViewId === 'view-signup') {
+                bottomNav.style.display = 'none';
+            } else {
+                bottomNav.style.display = 'flex';
+            }
+        }
 
         // Update Bottom Nav state
         navItems.forEach(item => {
@@ -77,9 +94,6 @@ function initViewSwitching() {
             }, 200);
         }
     };
-
-    // Open site directly on the Login view by default
-    switchView('view-login');
 
     // Nav Items click events
     navItems.forEach(item => {

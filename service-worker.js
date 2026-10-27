@@ -1,4 +1,4 @@
-const CACHE_NAME = 'Nafs Hay V3';
+const CACHE_NAME = 'Nafs Hay V4';
 const ASSETS = [
 	'./',
 	'./index.html',

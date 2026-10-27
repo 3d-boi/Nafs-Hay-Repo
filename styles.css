@@ -125,6 +125,18 @@ body {
     z-index: 10;
 }
 /* ==========================================================================
+   Auth Views Layout Fix (Hide Bottom Nav & Remove Bottom Padding)
+   ========================================================================== */
+.app-container:has(#view-login.active-view) .bottom-nav,
+.app-container:has(#view-signup.active-view) .bottom-nav {
+    display: none !important;
+}
+
+.app-container:has(#view-login.active-view) .app-view.active-view,
+.app-container:has(#view-signup.active-view) .app-view.active-view {
+    padding-bottom: 0 !important;
+}
+/* ==========================================================================
    Header Component
    ========================================================================== */
 .app-header {
