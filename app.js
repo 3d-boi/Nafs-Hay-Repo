@@ -6,10 +6,27 @@ document.addEventListener('DOMContentLoaded', () => {
     initViewSwitching();
     initLeafletMap();
     registerServiceWorker(); // <-- PWA Service Worker Registration
+    initLoginHandlers();     // <-- Login Form & Password Toggle Handlers
+    initSignUpHandlers();    // <-- Sign Up Routing & Password Toggle Handlers
 });
 
 // Global reference for Leaflet map
 let mapInstance = null;
+
+/**
+ * Global Helper: Interactive Chip Toggle for Interests
+ */
+window.toggleInterest = function(buttonElement) {
+    if (!buttonElement) return;
+    const isCurrentlyActive = buttonElement.classList.contains('chip-active');
+    if (isCurrentlyActive) {
+        buttonElement.classList.remove('chip-active');
+        buttonElement.classList.add('chip-inactive');
+    } else {
+        buttonElement.classList.add('chip-active');
+        buttonElement.classList.remove('chip-inactive');
+    }
+};
 
 /**
  * Single-Page Application (SPA) View Switcher
@@ -21,6 +38,11 @@ function initViewSwitching() {
     const reportBackBtn = document.getElementById('btn-report-back');
     const communityBackBtn = document.getElementById('btn-community-back');
     const accountBackBtn = document.getElementById('btn-account-back');
+    const openAccountBtn = document.getElementById('btn-open-account');
+    const blogBackBtn = document.getElementById('btn-blog-back');
+    const loginBackBtn = document.getElementById('btn-login-back');
+    const initiativesBackBtn = document.getElementById('btn-initiatives-back');
+    const ideaBackBtn = document.getElementById('btn-idea-back');
 
     // Function to switch view by target ID
     window.switchView = function(targetViewId) {
@@ -55,6 +77,9 @@ function initViewSwitching() {
             }, 200);
         }
     };
+
+    // Open site directly on the Login view by default
+    switchView('view-login');
 
     // Nav Items click events
     navItems.forEach(item => {
@@ -92,6 +117,187 @@ function initViewSwitching() {
         accountBackBtn.addEventListener('click', (e) => {
             e.preventDefault();
             switchView('view-home');
+        });
+    }
+    if (openAccountBtn) {
+        openAccountBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchView('view-account');
+        });
+    }
+    if (blogBackBtn) {
+        blogBackBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchView('view-home');
+        });
+    }
+    if (loginBackBtn) {
+        loginBackBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchView('view-home');
+        });
+    }
+
+    // Back Button for Initiatives List Screen
+    if (initiativesBackBtn) {
+        initiativesBackBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchView('view-home');
+        });
+    }
+
+    // Back Button for Add Idea Screen
+    if (ideaBackBtn) {
+        ideaBackBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchView('view-home');
+        });
+    }
+
+    // Link Home Screen "إبلاغ عن مكان" card to Report View
+    const reportActionCard = document.querySelector('.quick-actions-grid .action-card');
+    if (reportActionCard) {
+        reportActionCard.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof window.switchView === 'function') {
+                window.switchView('view-report');
+            }
+        });
+    }
+
+    // Link Home Screen "انضم لمبادرة" card to Initiatives List View
+    const actionCards = document.querySelectorAll('.quick-actions-grid .action-card');
+    if (actionCards.length > 1) {
+        actionCards[1].addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof window.switchView === 'function') {
+                window.switchView('view-initiatives');
+            }
+        });
+    }
+
+    // Link Home Screen "اقترح فكرة" card to Add Idea View
+    if (actionCards.length > 2) {
+        actionCards[2].addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof window.switchView === 'function') {
+                window.switchView('view-add-idea');
+            }
+        });
+    }
+
+    // Link Home Screen "عرض الكل" button to Initiatives List View
+    const viewAllInitiativesBtn = document.querySelector('#view-home .section-block .section-link');
+    if (viewAllInitiativesBtn) {
+        viewAllInitiativesBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof window.switchView === 'function') {
+                window.switchView('view-initiatives');
+            }
+        });
+    }
+
+    // Link Community Screen "أضف فكرة" / action buttons to Add Idea View
+    const communityAddIdeaBtn = document.querySelector('#view-community .motivation-banner button, #view-community .btn-add-idea');
+    if (communityAddIdeaBtn) {
+        communityAddIdeaBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof window.switchView === 'function') {
+                window.switchView('view-add-idea');
+            }
+        });
+    }
+}
+
+/**
+ * Login Form and Password Visibility Handlers
+ */
+function initLoginHandlers() {
+    // Password visibility toggle
+    const toggleBtn = document.getElementById('toggle-password');
+    const passwordField = document.getElementById('password-field');
+    const eyeIcon = document.getElementById('eye-icon');
+
+    if (toggleBtn && passwordField && eyeIcon) {
+        toggleBtn.addEventListener('click', () => {
+            const isPassword = passwordField.type === 'password';
+            passwordField.type = isPassword ? 'text' : 'password';
+            eyeIcon.textContent = isPassword ? 'visibility_off' : 'visibility';
+            toggleBtn.setAttribute('aria-label', isPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور');
+        });
+    }
+
+    // Handle Login Submit to transition to Home View
+    const loginForm = document.querySelector('#view-login form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (typeof window.switchView === 'function') {
+                window.switchView('view-home');
+            }
+        });
+    }
+
+    // Link from Login view -> Sign Up view
+    const linkToSignUp = document.querySelector('.login-signup-link');
+    if (linkToSignUp) {
+        linkToSignUp.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof window.switchView === 'function') {
+                window.switchView('view-signup');
+            }
+        });
+    }
+}
+
+/**
+ * Sign Up Form, Routing, and Password Visibility Handlers
+ */
+function initSignUpHandlers() {
+    // Link from Sign Up view -> Login view
+    const linkToLogin = document.getElementById('link-to-login');
+    if (linkToLogin) {
+        linkToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof window.switchView === 'function') {
+                window.switchView('view-login');
+            }
+        });
+    }
+
+    // Sign Up password visibility toggle
+    const toggleSignupBtn = document.getElementById('toggle-signup-password');
+    const signupPasswordField = document.getElementById('signup-password-field');
+    const signupEyeIcon = document.getElementById('signup-eye-icon');
+
+    if (toggleSignupBtn && signupPasswordField && signupEyeIcon) {
+        toggleSignupBtn.addEventListener('click', () => {
+            const isPassword = signupPasswordField.type === 'password';
+            signupPasswordField.type = isPassword ? 'text' : 'password';
+            signupEyeIcon.textContent = isPassword ? 'visibility_off' : 'visibility';
+            toggleSignupBtn.setAttribute('aria-label', isPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور');
+        });
+    }
+
+    // Sign Up primary CTA button -> Home View
+    const signupSubmitBtn = document.getElementById('btn-signup-submit');
+    if (signupSubmitBtn) {
+        signupSubmitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof window.switchView === 'function') {
+                window.switchView('view-home');
+            }
+        });
+    }
+
+    // Handle form submission via Enter key inside Sign Up form
+    const signupForm = document.querySelector('#view-signup form');
+    if (signupForm) {
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (typeof window.switchView === 'function') {
+                window.switchView('view-home');
+            }
         });
     }
 }

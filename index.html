@@ -29,11 +29,14 @@
             <!-- Header Component -->
             <header class="app-header">
                 <div class="user-bar">
+                    <!-- Replace this part in Screen 1 -->
                     <div class="user-profile">
-                        <div class="avatar-wrapper">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAemEaaPxyqXsdwUtnySozO22DM9kcjLGgBiMnO2EYN8tNezTPtyCfyA0NqVWBgazHk7LypaDu217_NiRYY6Jurv1X4a3czyn1iL8NRAkbRCfl4iRlhtxNRYDdiAOEmokPwYURY-xxvbdVsWdYbUKXwKrDi5gsszQ63e9xS5IInW12cyUXHItGHNyzPuFY0wPt8xkjKiIjU4ATb8-NOEgxyCLppMflGzu1JCPZ7l6p1B-rXCbwHGf1c" alt="User Profile" class="user-avatar">
-                            <span class="status-dot"></span>
-                        </div>
+                        <button class="profile-click-btn" id="btn-open-account" aria-label="عرض الملف الشخصي">
+                            <div class="avatar-wrapper">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAemEaaPxyqXsdwUtnySozO22DM9kcjLGgBiMnO2EYN8tNezTPtyCfyA0NqVWBgazHk7LypaDu217_NiRYY6Jurv1X4a3czyn1iL8NRAkbRCfl4iRlhtxNRYDdiAOEmokPwYURY-xxvbdVsWdYbUKXwKrDi5gsszQ63e9xS5IInW12cyUXHItGHNyzPuFY0wPt8xkjKiIjU4ATb8-NOEgxyCLppMflGzu1JCPZ7l6p1B-rXCbwHGf1c" alt="User Profile" class="user-avatar">
+                                <span class="status-dot"></span>
+                            </div>
+                        </button>
                         <div>
                             <div class="greeting-row">
                                 <h1 class="greeting-title">أهلاً بك، أحمد</h1>
@@ -72,15 +75,16 @@
                         <div class="hero-top">
                             <span class="hero-tag">
                                 <span class="pulse-dot"></span>
-                                مبادرة هذا الأسبوع
+                                مقال هذا الأسبوع
                             </span>
-                            <span class="hero-location-badge">المعادي الخضراء</span>
                         </div>
-                        <h2 class="hero-title">حملة تشجير حي المعادي - هذا السبت</h2>
-                        <p class="hero-desc">نستهدف زراعة ٥٠٠ شجرة لتقليل الانبعاثات وتجميل الشوارع بمشاركة أهالي الحي والشباب.</p>
+                        <h2 class="hero-title">أفضل 5 أنواع أشجار ظل</h2>
+                        <p class="hero-desc">
+                                تعرّف على فصائل الاشجار التي تتحمل درجات الحرارة العالية وتمنح حديقتك ظلاً و منظر جمالي مع استهلاك مائي بسيط.
+                            </p>
                         <div class="hero-footer">
                             <button class="btn btn-secondary-fixed">
-                                <span>سجل الآن</span>
+                                <span>اقراء الآن</span>
                                 <span class="material-symbols-outlined">arrow_back</span>
                             </button>
                             <div class="carousel-dots" aria-label="مؤشرات الشرائح">
@@ -94,14 +98,14 @@
 
                 <!-- Quick Actions Grid Component -->
                 <section class="quick-actions-grid">
-                    <button class="action-card">
+                    <button class="action-card" onclick="switchView('view-report')">
                         <div class="action-icon error-bg">
                             <span class="material-symbols-outlined">photo_camera</span>
                         </div>
                         <span class="action-label">إبلاغ عن مكان</span>
                         <span class="action-sub">رصد بيئي</span>
                     </button>
-                    <button class="action-card">
+                    <button class="action-card" onclick="switchView('view-initiatives')">
                         <div class="action-icon secondary-bg">
                             <span class="material-symbols-outlined">park</span>
                         </div>
@@ -261,6 +265,7 @@
             <header class="app-header map-header">
                 <button class="icon-btn notification-btn" aria-label="الإشعارات">
                     <span class="material-symbols-outlined">notifications</span>
+                    <span class="badge-count">3</span> <!-- Added badge count -->
                 </button>
                 <h1 class="header-title-center">المدن الخضراء</h1>
                 <button class="icon-btn back-to-home-btn" id="btn-map-back" aria-label="رجوع">
@@ -605,9 +610,9 @@
                     <h2 class="community-main-title">أفكار ومقترحات المجتمع</h2>
                     <p class="community-sub-title">شارك رؤيتك لبيئة حضرية مستدامة ونظيفة</p>
                 </div>
-                <button class="btn btn-primary-container add-idea-btn" type="button">
+                <button class="btn btn-primary btn-add-idea" onclick="switchView('view-add-idea')">
+                    <span class="material-symbols-outlined icon-sm">add</span>
                     <span>أضف فكرة</span>
-                    <span class="emoji-sm">💡</span>
                 </button>
             </div>
 
@@ -765,20 +770,6 @@
                     <h2 class="profile-name">أحمد محمود</h2>
                     <span class="profile-id">عضوية نشطة: #EG-84291</span>
 
-                    <div class="eco-rank-pill">
-                        <span>🌿</span>
-                        <span class="rank-text">صديق البيئة الفضي</span>
-                    </div>
-
-                    <div class="level-progress-box">
-                        <div class="level-info-row">
-                            <span class="level-title-text">المستوى 4: ناشط واعد</span>
-                            <span class="level-score-text">1,250 / 2,000 نقطة (62%)</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill-custom" style="width: 62%;"></div>
-                        </div>
-                    </div>
                 </section>
 
                 <!-- Impact Dashboard Grid (4 Bento Stat Cards) -->
@@ -955,6 +946,676 @@
         </div>
 
         <!-- ===================================================================
+             SCREEN 6: THE BLOG & ECO GUIDE VIEW (#view-blog)
+             =================================================================== -->
+        <div id="view-blog" class="app-view">
+            <!-- Top App Bar -->
+            <header class="app-header map-header">
+                <button aria-label="الإشعارات" class="icon-btn relative notification-btn">
+                    <span class="material-symbols-outlined text-[24px]">notifications</span>
+                    <span class="badge-count">3</span> <!-- Replaced blog-badge-dot with badge-count -->
+                </button>
+                <h1 class="header-title-center">الدليل الأخضر والنصائح البيئية</h1>
+                <button aria-label="الرجوع" class="icon-btn" id="btn-blog-back">
+                    <span class="material-symbols-outlined text-[24px]">arrow_forward</span>
+                </button>
+            </header>
+
+            <!-- Main Content Canvas -->
+            <main class="app-main blog-main">
+                <!-- Search Section -->
+                <div class="blog-search-box">
+                    <span class="material-symbols-outlined blog-search-icon">search</span>
+                    <input class="blog-search-input" placeholder="ابحث عن نصيحة، نبتة، أو دليل زراعي..." type="search"/>
+                    <button aria-label="تصفية البحث" class="blog-filter-icon-btn" type="button">
+                        <span class="material-symbols-outlined">tune</span>
+                    </button>
+                </div>
+
+                <!-- Category Filter Chips -->
+                <div class="blog-categories-scroll no-scrollbar">
+                    <button class="blog-chip-btn blog-chip-active" type="button">الكل</button>
+                    <button class="blog-chip-btn" type="button">طرق العناية بالأشجار</button>
+                    <button class="blog-chip-btn" type="button">الزراعة الحضرية</button>
+                    <button class="blog-chip-btn" type="button">إعادة التدوير والكمبوست</button>
+                    <button class="blog-chip-btn" type="button">الري المستدام</button>
+                </div>
+
+                <!-- Featured Hero Article Card -->
+                <section>
+                    <div class="blog-hero-card">
+                        <div class="blog-hero-image-box">
+                            <img class="blog-hero-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV2hRhjjiB2KEX4Fzs13QGr7UYtg8Lwhc8bkh9I7fKrIx8uga0-RB7HscBSgY0WBJYarqIwiVjl-vDHJnEGkOsMT24WW0kF4J17AIqyWXeZ7W9aHA7Z7y2HggmoqJpAb5ltMWz4ksWo6bDMQzEvYXfhHFg7JF9JqEgwZBGpkuYOC250YlY7SRIm88RhXJTt0ExLZlqroqFpiwAqsDjdqXux5y52QinmQMGWflA1ELz4I6j_1hWnGg9" alt="Urban Park"/>
+                            <div class="blog-hero-overlay"></div>
+                            <span class="blog-hero-badge">
+                                <span class="material-symbols-outlined icon-sm">auto_stories</span>
+                                دليل عملي
+                            </span>
+                            <button aria-label="حفظ في المفضلة" class="blog-bookmark-btn" type="button">
+                                <span class="material-symbols-outlined">bookmark</span>
+                            </button>
+                            <div class="blog-hero-read-time">
+                                <span class="material-symbols-outlined icon-sm">schedule</span>
+                                <span>قراءة 4 دقائق</span>
+                            </div>
+                        </div>
+
+                        <div class="blog-hero-body">
+                            <div class="blog-hero-category-tag">
+                                <span class="material-symbols-outlined icon-sm">park</span>
+                                <span>أشجار البيئة المحلية والظل</span>
+                            </div>
+                            <h2 class="blog-hero-title">
+                                أفضل 5 أنواع أشجار ظل تناسب مناخنا الجاف وموفرة للمياه
+                            </h2>
+                            <p class="blog-hero-desc">
+                                تعرّف على فصائل الغاف، السدر، والأكاسيا التي تتحمل درجات الحرارة العالية وتمنح حديقتك ظلاً وارفاً مع استهلاك مائي لا يتعدى 30% مقارنة بالنباتات المستوردة.
+                            </p>
+                            <div class="blog-hero-footer">
+                                <div class="blog-author-info">
+                                    <div class="blog-author-avatar">ع</div>
+                                    <span class="blog-author-name">م. علي الخالدي</span>
+                                </div>
+                                <a class="blog-read-more-link" href="#">
+                                    <span>اقرأ المزيد</span>
+                                    <span class="material-symbols-outlined icon-sm">chevron_left</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Article Feed Section -->
+                <section class="blog-feed-section">
+                    <div class="section-header">
+                        <div class="blog-header-title-box">
+                            <h3 class="section-title">أحدث المقالات والإرشادات</h3>
+                            <span class="count-pill">18</span>
+                        </div>
+                        <button class="section-link" type="button">عرض الكل</button>
+                    </div>
+
+                    <div class="blog-article-list">
+                        <!-- Article Card 1 -->
+                        <article class="blog-article-card">
+                            <div class="blog-article-thumb-box">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZJrdHkMHGErQBMXZg_UDZXwtGkiEWwOBjfytV4ml3BFiKOQMqm25TmgC2GGwgWG09bpKoYhDa38LAYKt5ttaZmssvZvXgn8oez7sWGLLkgC6FKyRkaObKSdC3iS5FpqslfCyam-u26RqV_Yx9TkP-f4NTxiSdQpVveuT-EDxOXUsLqdnpyjHkEsR_PmLF5TowiRdVxCCbQErx4qSDAK1FPi2rebj_NzvPLxiyzPV3GPwWbmoRqOIy" alt="Compost" class="blog-article-thumb-img"/>
+                                <span class="blog-thumb-badge">3 دقائق</span>
+                            </div>
+                            <div class="blog-article-content">
+                                <div class="blog-article-top-meta">
+                                    <span class="blog-article-tag">إعادة تدوير</span>
+                                    <button aria-label="مشاركة" class="blog-icon-link-btn" type="button">
+                                        <span class="material-symbols-outlined">share</span>
+                                    </button>
+                                </div>
+                                <h4 class="blog-article-title">دليل صناعة السماد العضوي (الكمبوست) من بقايا المنزل</h4>
+                                <div class="blog-article-bottom-meta">
+                                    <span>تحديث: أمس</span>
+                                    <span class="blog-level-tag">
+                                        <span class="material-symbols-outlined icon-sm">eco</span>
+                                        مبتدئ
+                                    </span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Eco Tip Banner -->
+                <section class="eco-tip-banner">
+                    <div class="tip-icon-box">
+                        <span class="material-symbols-outlined">lightbulb</span>
+                    </div>
+                    <div class="tip-content">
+                        <h4 class="tip-title">نصيحة اليوم الذكية</h4>
+                        <p class="tip-desc">
+                            قم بري الأشجار بعد غروب الشمس أو في الصباح الباكر لتقليل التبخر بنسبة تصل إلى 45% والحفاظ على رطوبة الجذور.
+                        </p>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             SCREEN 7: LOGIN VIEW (#view-login)
+             =================================================================== -->
+        <div id="view-login" class="app-view">
+            <!-- Top Decorative Eco Ambient Glow -->
+            <div class="login-glow-1"></div>
+            <div class="login-glow-2"></div>
+
+            <!-- Header Navigation -->
+            <header class="login-header">
+                <div class="login-brand-stamp">
+                    <span class="login-brand-dot"></span>
+                    <span class="login-brand-title">نفس حي</span>
+                </div>
+                <button aria-label="المساعدة والمصادر" class="login-icon-btn" type="button">
+                    <span class="material-symbols-outlined text-[20px]">help_outline</span>
+                </button>
+            </header>
+
+            <!-- Main Content Canvas -->
+            <main class="login-main-canvas">
+                <!-- Eco Emblem & Greeting Section -->
+                <div class="login-greeting-box">
+                    <div class="login-emblem-wrap">
+                        <div class="login-emblem-outer">
+                            <div class="login-emblem-inner">
+                                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1; font-size: 34px;">eco</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h1 class="login-title">تسجيل الدخول</h1>
+                    <p class="login-subtitle">مرحباً بعودتك! تابع مساهماتك وأثرك البيئي في حيك ومدينتك.</p>
+                </div>
+
+                <!-- Quick Social / Identity Logins -->
+                <div class="login-social-grid">
+                    <button class="login-social-btn" type="button">
+                        <svg class="login-social-svg" viewBox="0 0 24 24">
+                            <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.02h3.87c2.26-2.09 3.675-5.17 3.675-9.12z" fill="#4285F4"></path>
+                            <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.87-3.02c-1.08.72-2.45 1.16-4.06 1.16-3.13 0-5.78-2.11-6.73-4.96H1.24v3.11C3.26 21.36 7.35 24 12 24z" fill="#34A853"></path>
+                            <path d="M5.27 14.27c-.25-.72-.39-1.49-.39-2.27s.14-1.55.39-2.27V6.62H1.24C.45 8.19 0 9.97 0 12s.45 3.81 1.24 5.38l4.03-3.11z" fill="#FBBC05"></path>
+                            <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.24 6.62l4.03 3.11c.95-2.85 3.6-4.98 6.73-4.98z" fill="#EA4335"></path>
+                        </svg>
+                        <span>Google</span>
+                    </button>
+                    <button class="login-social-btn" type="button">
+                        <svg class="login-social-svg fill-current" viewBox="0 0 170 170">
+                            <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.07-7.66-7.85-11.91-14.34-6.41-9.76-11.45-20.91-15.12-33.47-3.68-12.56-5.52-24.36-5.52-35.42 0-14.53 3.66-26.73 10.99-36.6 7.32-9.87 16.54-14.94 27.65-15.2 4.93 0 10.42 1.34 16.48 4.02 6.06 2.68 9.94 4.02 11.64 4.02 1.54 0 5.46-1.34 11.76-4.02 6.3-2.68 11.55-3.87 15.75-3.56 12.01.76 21.6 5.16 28.77 13.2-10.45 6.32-15.54 15.02-15.28 26.11.27 8.65 3.51 16.03 9.72 22.14 6.21 6.11 13.79 9.68 22.74 10.72-2.12 6.32-4.81 12.02-8.08 17.1zm-32.88-107.5c0 5.92-2.15 11.75-6.45 17.5-4.3 5.75-9.67 9.42-16.1 11.02-.27-1.35-.4-2.58-.4-3.69 0-5.91 2.22-11.83 6.66-17.76 4.44-5.93 9.87-9.5 16.29-10.71z"></path>
+                        </svg>
+                        <span>Apple</span>
+                    </button>
+                </div>
+
+                <!-- Tonal Separator -->
+                <div class="login-separator">
+                    <span>أو عبر البريد / الجوال</span>
+                </div>
+
+                <!-- Credential Form -->
+                <form class="login-form" onsubmit="event.preventDefault();">
+                    <div class="login-field-group">
+                        <label class="login-label">البريد الإلكتروني أو رقم الجوال</label>
+                        <div class="login-input-wrap">
+                            <span class="absolute right-3.5 text-on-surface-variant pointer-events-none material-symbols-outlined text-[20px]">mail</span>
+                            <input class="login-input" placeholder="name@greencity.sa أو 05xxxxxxxx" type="text"/>
+                        </div>
+                    </div>
+
+                    <div class="login-field-group">
+                        <label class="login-label">كلمة المرور</label>
+                        <div class="login-input-wrap">
+                            <span class="absolute right-3.5 text-on-surface-variant pointer-events-none material-symbols-outlined text-[20px]">lock</span>
+                            <input class="login-input tracking-wider" id="password-field" placeholder="••••••••" type="password"/>
+                            <button aria-label="إظهار كلمة المرور" class="login-eye-btn" id="toggle-password" type="button">
+                                <span class="material-symbols-outlined text-[20px]" id="eye-icon">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="login-row-actions">
+                        <label class="login-checkbox-label">
+                            <input checked="" type="checkbox"/>
+                            <span>تذكرني على هذا الجهاز</span>
+                        </label>
+                        <a class="login-forgot-link" href="#">نسيت كلمة المرور؟</a>
+                    </div>
+
+                    <button class="login-submit-btn" type="submit">
+                        <span>تسجيل الدخول</span>
+                        <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+                    </button>
+                </form>
+
+                <!-- Biometric Card -->
+                <div class="login-bio-box">
+                    <div class="login-bio-left">
+                        <div class="login-bio-icon">
+                            <span class="material-symbols-outlined text-[22px]">fingerprint</span>
+                        </div>
+                        <div>
+                            <p class="login-bio-title">الدخول ببصمة الإصبع / الوجه</p>
+                            <p class="login-bio-sub">وصول فوري وآمن بلمسة واحدة</p>
+                        </div>
+                    </div>
+                    <button class="login-bio-action-btn" type="button">تفعيل</button>
+                </div>
+
+                <!-- National SSO Badge -->
+                <button class="login-sso-btn" type="button">
+                    <span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                    <span class="login-sso-text">الدخول عبر النفاذ الوطني الموحد</span>
+                </button>
+            </main>
+
+            <!-- Screen Footer -->
+            <footer class="login-footer">
+                <p class="login-footer-text">
+                    ليس لديك حساب بعد؟ 
+                    <a class="login-signup-link" href="#">إنشاء حساب جديد</a>
+                </p>
+                <div class="login-motto-row">
+                    <span class="material-symbols-outlined text-[14px]">park</span>
+                    <span class="login-motto-text">معاً نحو مدن سعودية أكثر استدامة واخضراراً</span>
+                </div>
+            </footer>
+        </div>
+
+        <!-- ===================================================================
+             SCREEN 8: SIGN UP VIEW (#view-signup)
+             =================================================================== -->
+        <div id="view-signup" class="app-view">
+            <!-- Decorative Ambient Header Glow -->
+            <div class="signup-glow-1"></div>
+            <div class="signup-glow-2"></div>
+
+            <!-- Top Safe Area / Contextual Top Bar -->
+            <header class="signup-header">
+                <div class="signup-badge-tag">
+                    <span class="signup-badge-dot"></span>
+                    <span class="signup-badge-text">بوابة التطوع الحضري</span>
+                </div>
+                <button aria-label="مساعدة" class="signup-icon-btn" type="button">
+                    <span class="material-symbols-outlined text-[20px]">help_outline</span>
+                </button>
+            </header>
+
+            <!-- Scrollable Content Canvas -->
+            <main class="signup-main-canvas no-scrollbar">
+                <div>
+                    <!-- Brand Identity & Header Section -->
+                    <div class="signup-greeting-box">
+                        <div class="login-emblem-wrap">
+                            <div class="login-emblem-outer">
+                                <div class="login-emblem-inner">
+                                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1; font-size: 34px;">eco</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="signup-title-row">
+                            <h1 class="signup-main-title">نفس حي</h1>
+                        </div>
+                        <h2 class="signup-welcome-title">مرحباً بك في نفس حس 🌱</h2>
+                        <p class="signup-welcome-desc">خطوة واحدة تفصلك عن بيئة حضرية أنظف وأجمل في حيك ومدينتك.</p>
+                    </div>
+
+                    <!-- Interactive Form Card -->
+                    <div class="signup-card">
+                        <!-- Social Quick Sign-In Buttons -->
+                        <!-- Social Quick Sign-In Buttons -->
+                        <div class="signup-social-grid">
+                            <button class="signup-social-btn" type="button">
+                                <svg class="signup-social-svg" viewBox="0 0 24 24">
+                                    <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z" fill="#4285F4"></path>
+                                    <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.25 21.36 7.33 24 12 24z" fill="#34A853"></path>
+                                    <path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.14-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z" fill="#FBBC05"></path>
+                                    <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+                                </svg>
+                                <span>حساب Google</span>
+                            </button>
+                            <button class="signup-social-btn" type="button">
+                                <svg class="signup-social-svg fill-current text-on-surface" viewBox="0 0 170 170">
+                                    <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.04-7.67-7.81-11.94-14.3-5.77-8.73-10.23-18.78-13.38-30.15-3.15-11.37-4.73-22.35-4.73-32.95 0-14.48 3.56-26.68 10.67-36.6 7.12-9.92 16.3-14.99 27.56-15.21 4.7 0 9.94 1.21 15.72 3.63 5.77 2.42 9.53 3.63 11.28 3.63 1.34 0 5.35-1.29 12.03-3.87 6.68-2.58 12.44-3.63 17.29-3.14 13.06.78 23.3 5.37 30.72 13.78-11.45 6.94-17.06 16.48-16.84 28.63.22 9.54 3.86 17.65 10.92 24.32 7.06 6.67 15.42 10.45 25.08 11.34-2.13 6.42-4.59 12.82-7.39 19.23zM119.22 33.15c0-6.84 2.5-13.43 7.5-19.77 5-6.34 11.33-10.37 19-12.08.34 1.34.5 2.68.5 4.02 0 6.84-2.6 13.56-7.8 20.15-5.2 6.59-11.53 10.48-18.99 11.67-.11-1.34-.21-2.67-.21-3.99z"></path>
+                                </svg>
+                                <span>حساب Apple</span>
+                            </button>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="signup-divider">
+                            <span>أو باستخدام البيانات الشخصية</span>
+                        </div>
+
+                        <!-- Form Fields Stack -->
+                        <form class="signup-form-stack" onsubmit="event.preventDefault();">
+                            <div>
+                                <label class="signup-field-label" for="fullName">الاسم الكامل</label>
+                                <div class="signup-input-wrap">
+                                    <span class="material-symbols-outlined signup-input-icon">person</span>
+                                    <input class="signup-input-field" id="fullName" placeholder="أدخل اسمك الكريم" type="text" value="أحمد محمود"/>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="signup-field-label" for="contactInfo">البريد الإلكتروني أو رقم الجوال</label>
+                                <div class="signup-input-wrap">
+                                    <span class="material-symbols-outlined signup-input-icon">alternate_email</span>
+                                    <input class="signup-input-field" id="contactInfo" placeholder="name@example.com أو 05xxxxxxxx" type="text"/>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="signup-field-label" for="passwordField">كلمة المرور</label>
+                                <div class="signup-input-wrap">
+                                    <span class="material-symbols-outlined signup-input-icon">lock</span>
+                                    <input class="signup-input-field tracking-wider" id="signup-password-field" type="password" value="••••••••••••"/>
+                                    <button aria-label="عرض كلمة المرور" class="signup-eye-btn" id="toggle-signup-password" type="button">
+                                        <span class="material-symbols-outlined text-[20px]" id="signup-eye-icon">visibility</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Onboarding Interests Step -->
+                </div>
+
+                <!-- Footer Action Area -->
+                <footer class="signup-footer-area">
+                    <button class="signup-submit-btn" id="btn-signup-submit" type="button">
+                        <span>إنشاء الحساب وبدء المشاركة</span>
+                        <span class="material-symbols-outlined text-[22px]">eco</span>
+                    </button>
+                    <div class="signup-login-redirect">
+                        <p class="font-body-md text-body-md text-on-surface-variant">
+                            لديك حساب بالفعل؟
+                            <a class="font-bold text-primary hover:text-secondary underline underline-offset-4 decoration-secondary/40 transition-colors mr-1" href="#" id="link-to-login">
+                                تسجيل الدخول
+                            </a>
+                        </p>
+                    </div>
+                    <p class="text-center font-label-sm text-label-sm text-outline/80 mt-2">
+                        بانضمامك أنت توافق على ميثاق الاستدامة وشروط خدمة المدن الخضراء
+                    </p>
+                </footer>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+            SCREEN 9: INITIATIVES & EVENTS LIST VIEW (#view-initiatives)
+            =================================================================== -->
+        <div id="view-initiatives" class="app-view">
+            <!-- Top Sticky Header -->
+            <header class="app-header map-header">
+                <div class="header-right-group">
+                    <button class="icon-btn" aria-label="الإشعارات والرجوع" id="btn-initiatives-back">
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                    <h1 class="header-title-center">المبادرات وفعاليات التشجير</h1>
+                </div>
+                <div class="header-left-actions">
+                    <button class="icon-btn" aria-label="بحث">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                    <button class="icon-btn" aria-label="تصفية الفعاليات">
+                        <span class="material-symbols-outlined">tune</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Content Canvas -->
+            <main class="app-main initiatives-main">
+                <!-- Subheader Highlights Banner -->
+                <!--
+                    <section class="initiatives-banner">
+                        <div class="banner-right">
+                            <div class="banner-icon-box">
+                                <span class="material-symbols-outlined fill" style="font-variation-settings: 'FILL' 1;">forest</span>
+                            </div>
+                            <div>
+                                <span class="banner-sub-text">مستهدف الحي هذا الشهر</span>
+                                <h2 class="banner-main-title">1,250 شتلة مثمرة</h2>
+                            </div>
+                        </div>
+                        <div class="banner-left">
+                            <span class="banner-status-pill">+28% نشاط</span>
+                            <span class="banner-count-text">3 فعاليات قادمة</span>
+                        </div>
+                    </section>
+                -->
+
+                <!-- Segmented Control Tabs -->
+                <nav class="initiatives-tabs-nav" aria-label="تبويبات الفعاليات">
+                    <div class="tabs-container">
+                        <button class="tab-btn active">الفعاليات القادمة</button>
+                        <button class="tab-btn">مبادراتي المشارك فيها</button>
+                        <button class="tab-btn">الفعاليات السابقة</button>
+                    </div>
+                </nav>
+
+                <!-- Event Cards Stack -->
+                <div class="initiatives-list">
+                    <!-- Event Card 1 -->
+                    <article class="event-card">
+                        <div class="event-image-box">
+                            <img class="event-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHTBpcZTj71QgDpA6-LbytL9dZG3AJSwujh2TIxcJhr3qrLdY6_h5FSCQwNYfhcljrMiMs90XFGmzqPRyGDg2Zl2kevS72YjpfgfQHODnUGT9YueM079B4ySPDv2CQMdad8YI0fmbZYyR_oe14q_EGECG97W3WqXJkikx7R4ESZMQy_j7-GlECP0sk7fjHqE4dCJtlGpB18aJI2LMPKKYjq_Y7gozo_cBM8Tfdrv9lHpmjyWPKivvI" alt="حملة تشجير">
+                            <div class="event-img-overlay"></div>
+                            <div class="event-badge-right">
+                                <span class="material-symbols-outlined icon-sm">energy_savings_leaf</span>
+                                <span>حملة تشجير كبرى (500 شجرة)</span>
+                            </div>
+                            <div class="event-badge-left">
+                                <span class="material-symbols-outlined fill icon-sm text-secondary" style="font-variation-settings: 'FILL' 1;">stars</span>
+                                <span>+150 نقطة بيئية</span>
+                            </div>
+                            <div class="event-img-title">
+                                <h2>تشجير وتطوير كورنيش المعادي</h2>
+                            </div>
+                        </div>
+
+                        <div class="event-body">
+                            <div class="event-meta-group">
+                                <div class="meta-row">
+                                    <span class="material-symbols-outlined icon-sm text-primary">calendar_month</span>
+                                    <span class="meta-bold-text">السبت 15 نوفمبر - 9:00 ص</span>
+                                </div>
+                                <div class="meta-row justify-between">
+                                    <div class="meta-row">
+                                        <span class="material-symbols-outlined icon-sm text-primary">location_on</span>
+                                        <span class="meta-text">ممشى المعادي البيئي</span>
+                                    </div>
+                                    <a href="#" class="meta-map-link">
+                                        <span>الخريطة</span>
+                                        <span class="material-symbols-outlined icon-sm">arrow_outward</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="gauge-box">
+                                <div class="gauge-header">
+                                    <span class="gauge-title">
+                                        <span class="material-symbols-outlined icon-sm text-secondary">groups</span>
+                                        35 / 50 متطوع مسجل
+                                    </span>
+                                    <span class="gauge-percentage">70% مكتمل</span>
+                                </div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill" style="width: 70%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="event-footer">
+                                <div class="organizer-info">
+                                    <div class="organizer-avatar">ع</div>
+                                    <div>
+                                        <span class="organizer-label">الجهة المبادرة</span>
+                                        <span class="organizer-name">جمعية عمارة البيئة</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-register">
+                                    <span>تسجيل المشاركة</span>
+                                    <span class="material-symbols-outlined icon-sm">how_to_reg</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Event Card 2 -->
+                    <article class="event-card">
+                        <div class="event-image-box">
+                            <img class="event-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-rUN0R1WE21jUMU5oTGXKy47XCBLErAnGosAYz4fWfmQsdrKtuLdbYkrQ2xLbIBLqTVRNaXtUsneVqRqEn6bo-tJiiRra9fvsMykJHk-_ecx9jWGAdLirSAov9XhdqgrdufPJPr9KyVDjP4iw9sRsWsUYZvTazZj6OzgkAqZ5JH7f6CsZ1RpTesiWDA0GMikjA3IZ8zQLpplDDTuT2XejDHwnnf8Ql1GoybwMoV7HKC3YJG0ZaQaG" alt="ورشة زراعة">
+                            <div class="event-img-overlay"></div>
+                            <div class="event-badge-right">
+                                <span class="material-symbols-outlined icon-sm">potted_plant</span>
+                                <span>ورشة تدريبية عملية</span>
+                            </div>
+                            <div class="event-badge-error">
+                                <span class="material-symbols-outlined icon-sm">alarm</span>
+                                <span>متبقي 8 مقاعد فقط</span>
+                            </div>
+                            <div class="event-img-title">
+                                <h2>ورشة الزراعة الحضرية المنزلية والأسطح</h2>
+                            </div>
+                        </div>
+
+                        <div class="event-body">
+                            <div class="event-meta-group">
+                                <div class="meta-row">
+                                    <span class="material-symbols-outlined icon-sm text-primary">calendar_month</span>
+                                    <span class="meta-bold-text">الأحد 23 نوفمبر - 4:30 م</span>
+                                </div>
+                                <div class="meta-row justify-between">
+                                    <div class="meta-row">
+                                        <span class="material-symbols-outlined icon-sm text-primary">location_on</span>
+                                        <span class="meta-text">حديقة الأندلس - قاعة الطبيعة</span>
+                                    </div>
+                                    <span class="free-badge">مجانية بالكامل</span>
+                                </div>
+                            </div>
+
+                            <div class="perks-scroll no-scrollbar">
+                                <span class="perk-chip">
+                                    <span class="material-symbols-outlined icon-sm text-secondary">check_circle</span>
+                                    حقيبة بذور هدية
+                                </span>
+                                <span class="perk-chip">
+                                    <span class="material-symbols-outlined icon-sm text-secondary">check_circle</span>
+                                    شهادة حضور بيئية
+                                </span>
+                                <span class="perk-chip">
+                                    <span class="material-symbols-outlined icon-sm text-secondary">stars</span>
+                                    +90 نقطة
+                                </span>
+                            </div>
+
+                            <div class="event-footer">
+                                <div class="duration-text">
+                                    <span class="material-symbols-outlined icon-sm">schedule</span>
+                                    <span>المدة: ساعتان ونصف</span>
+                                </div>
+                                <button class="btn btn-primary btn-register">
+                                    <span>تسجيل المشاركة</span>
+                                    <span class="material-symbols-outlined icon-sm">how_to_reg</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Motivation Banner -->
+                    <section class="motivation-banner">
+                        <div class="motivation-content">
+                            <div class="motivation-icon">
+                                <span class="material-symbols-outlined">compost</span>
+                            </div>
+                            <div>
+                                <h3 class="motivation-title">لديك فكرة مبادرة لحيّك؟</h3>
+                                <p class="motivation-desc">اقترح موقعاً يحتاج إلى تشجير أو صيانة</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-motivation">إطلاق مبادرة</button>
+                    </section>
+                </div>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+        SCREEN 10: ADD NEW IDEA VIEW (#view-add-idea)
+        =================================================================== -->
+        <div id="view-add-idea" class="app-view">
+            <!-- Top Modal App Bar -->
+            <header class="app-header idea-header">
+                <button class="icon-btn" aria-label="إلغاء" id="btn-idea-back">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                <h1 class="header-title-center">مشاركة فكرة جديدة</h1>
+                <button class="btn btn-primary btn-publish">
+                    <span>نشر</span>
+                    <span class="material-symbols-outlined icon-sm fill" style="font-variation-settings: 'FILL' 1;">send</span>
+                </button>
+            </header>
+
+            <!-- Scrollable Content Canvas -->
+            <main class="app-main idea-main">
+                <!-- Author Identity & Audience Scope Selector -->
+
+                <!-- Post Body / Flexible Composer -->
+                <section class="idea-composer-box">
+                    <textarea class="idea-textarea no-scrollbar" placeholder="ما هي فكرتك لتخضير أو تحسين الحي؟ شاركنا برؤيتك البيئية مع الجيران والمجلس البلدي..." rows="4"></textarea>
+                    
+                </section>
+
+                <!-- Attached Media Preview -->
+                <section class="idea-media-box">
+                    <div class="media-header">
+                        <span class="media-title">
+                            <span class="material-symbols-outlined icon-sm text-primary">photo_library</span>
+                            الصور والمخططات المرفقة (1)
+                        </span>
+                        <span class="media-subtitle">تصور مقترح</span>
+                    </div>
+                    <div class="media-grid">
+                        <div class="media-preview-card">
+                            <img class="media-preview-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqP_UCFMz0Rnn9nwPETYalyYvnECTi9bQBPcqOhmqP50N9Ad-vca3g55zYm_RLZob-JK2ewj82W5UYeDoxorCvcG11K9cCjrks672DBmI36SpgJaLn-20o8JAPopgkSzp_TUeVZ0jpdrPDZZHOQR6N1heblhH7q3Vv9oBu5v319CKjfSwmRstw-ZbFxJoEGHO9xaddhss7mkIVfexxE649Rrwyfbz5v9vokzMEk3drqDSm-1bfbI9A" alt="تصور مقترح">
+                            <div class="media-overlay">
+                                <div class="media-delete-row">
+                                    <button class="media-delete-btn" aria-label="حذف الصورة">
+                                        <span class="material-symbols-outlined icon-xs">close</span>
+                                    </button>
+                                </div>
+                                <span class="media-location-tag">شارع 9 - المعادي</span>
+                            </div>
+                        </div>
+                        <button class="media-add-slot">
+                            <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+                            <span class="media-add-text">إضافة صورة</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Interactive Community Poll Widget -->
+
+                <!-- Motivational Civic Impact Hint -->
+                <section class="idea-hint-box">
+                    <span class="material-symbols-outlined text-tertiary-container text-xl shrink-0 mt-0.5 fill" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+                    <div>
+                        <h2 class="hint-title">صوتك يصنع فارقاً ملموساً!</h2>
+                        <p class="hint-desc">
+                            الأفكار التي تحظى بأكثر من <span class="bold-highlight">50 تصويتاً مجتمعياً</span> يتم رفعها آلياً إلى المجلس البلدي للمنطقة لدراسة التمويل والتنفيذ.
+                        </p>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Social Composer Bottom Attachment Toolbar -->
+            <footer class="idea-footer-toolbar">
+                <div class="toolbar-actions-row">
+                    <div class="toolbar-icons-group">
+                        <button class="toolbar-action-btn text-primary" title="إضافة صور">
+                            <span class="material-symbols-outlined">image</span>
+                        </button>
+                        <button class="toolbar-action-btn text-secondary" title="تحديد الموقع الجغرافي">
+                            <span class="material-symbols-outlined">my_location</span>
+                        </button>
+                        <button class="toolbar-action-btn text-primary-container" title="إضافة تصويت لأهالي الحي">
+                            <span class="material-symbols-outlined">ballot</span>
+                        </button>
+                        <button class="toolbar-action-btn text-tertiary-container" title="إضافة وسوم">
+                            <span class="material-symbols-outlined">tag</span>
+                        </button>
+                        <button class="toolbar-action-btn text-secondary" title="تحديد الأثر البيئي">
+                            <span class="material-symbols-outlined">park</span>
+                        </button>
+                    </div>
+                    <div class="draft-status-indicator">
+                        <span class="material-symbols-outlined icon-xs text-secondary">cloud_done</span>
+                        <span>محفوظ كمسودة</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- ===================================================================
              BOTTOM NAVIGATION DOCK COMPONENT (Shared across all views)
              =================================================================== -->
         <nav class="bottom-nav" aria-label="شريط التنقل الرئيسي">
@@ -976,9 +1637,9 @@
                 <span class="material-symbols-outlined">group</span>
                 <span class="nav-label">المجتمع</span>
             </a>
-            <a href="#" class="nav-item" data-target="view-account">
-                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
-                <span class="nav-label">حسابي</span>
+            <a href="#" class="nav-item" data-target="view-blog">
+                <span class="material-symbols-outlined">auto_stories</span>
+                <span class="nav-label">مقالات</span>
             </a>
         </nav>
 
